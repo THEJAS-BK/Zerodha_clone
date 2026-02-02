@@ -1,5 +1,5 @@
 import { holdings } from "../data/data";
-export default function Holdings(){
+export default function Holdings() {
   return (
     <>
       <h3 className="title">Holdings ({holdings.length})</h3>
@@ -15,9 +15,27 @@ export default function Holdings(){
             <th>Net chg.</th>
             <th>Day chg.</th>
           </tr>
+
+          {holdings.map((stock, index) => {
+            const curVal = stock.price * stock.qty;
+            const isProfit = curVal - stock.avg * stock.qty >= 0.0;
+            const profClass = isProfit ? "profit" : "loss";
+            const dayClass = stock.isLoss ? "loss" : "profit";
+            return (
+              <tr key={index}>
+                <td>{stock.name}</td>
+                <td>{stock.qty}</td>
+                <td>{stock.avg.toFixed(2)}</td>
+                <td>{stock.price.toFixed(2)}</td>
+                <td>{curVal.toFixed(2)}</td>
+                <td className={profClass}>{(curVal - stock.avg * stock.qty).toFixed(2)}</td>
+                <td className={profClass}>{stock.net}%</td>
+                <td className={dayClass}>{stock.day}%</td>
+              </tr>
+            );
+          })}
         </table>
       </div>
-
       <div className="row">
         <div className="col">
           <h5>
@@ -38,6 +56,4 @@ export default function Holdings(){
       </div>
     </>
   );
-};
-
-
+}
