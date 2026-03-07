@@ -10,6 +10,15 @@ main().then(()=>{
 async function main(){
     await  mongoose.connect(process.env.MONGO_URL);
 }
+//schemas
+const Holdings=require("./models/holdings")
+const Orders=require("./models/orders")
+const Positions=require("./models/positions")
+//routes
+app.get("/addHoldings",async(req,res,next)=>{
+
+
+})
 
 app.listen(8080,()=>{
     console.log("Server is running on port 8080")
