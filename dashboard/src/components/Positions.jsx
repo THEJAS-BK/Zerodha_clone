@@ -1,6 +1,14 @@
-import { positions } from "../data/data";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 export default function Positions() {
+  let [positions, setPositions] = useState([]);
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/allPositions")
+      .then((res) => setPositions(res.data))
+      .catch((err) => console.log("unable to fetch positions", err));
+  }, []);
   return (
     <>
       <h3 className="title">Positions ({positions.length})</h3>
@@ -41,6 +49,4 @@ export default function Positions() {
       </div>
     </>
   );
-};
-
-
+}
