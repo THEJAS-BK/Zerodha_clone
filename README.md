@@ -115,5 +115,5 @@ npm start
 * Holdings UI
 * Buy window
 * Express REST APIs
-* MongoDB database integration
+*jest unit tests
 
